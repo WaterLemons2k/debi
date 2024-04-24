@@ -111,7 +111,7 @@ set_mirror_proxy() {
 
 set_security_archive() {
     case $suite in
-        buster|oldoldstable)
+        stretch|buster|oldoldstable)
             security_archive="$suite/updates"
             ;;
         bullseye|oldstable|bookworm|stable|trixie|testing)
@@ -127,7 +127,7 @@ set_security_archive() {
 
 set_daily_d_i() {
     case $suite in
-        buster|oldoldstable|bullseye|oldstable|bookworm|stable)
+        stretch|buster|oldoldstable|bullseye|oldstable|bookworm|stable)
             daily_d_i=false
             ;;
         trixie|testing|sid|unstable)
@@ -138,14 +138,26 @@ set_daily_d_i() {
     esac
 }
 
+move_to_archive() {
+    case $suite in
+        stretch)
+            mirror_host=archive.debian.org
+    esac
+}
+
 set_suite() {
     suite=$1
     set_daily_d_i
     set_security_archive
+
+    move_to_archive
 }
 
 set_debian_version() {
     case $1 in
+        9|stretch)
+            set_suite stretch
+            ;;
         10|buster|oldoldstable)
             set_suite buster
             ;;
@@ -168,6 +180,9 @@ set_debian_version() {
 
 has_cloud_kernel() {
     case $suite in
+        stretch)
+            [ "$architecture" = amd64 ] && [ "$bpo_kernel" = true ] && return
+            ;;
         buster|oldoldstable)
             [ "$architecture" = amd64 ] && return
             [ "$architecture" = arm64 ] && [ "$bpo_kernel" = true ] && return
@@ -184,7 +199,7 @@ has_cloud_kernel() {
 
 has_backports() {
     case $suite in
-        buster|oldoldstable|bullseye|oldstable|bookworm|stable|trixie|testing) return
+        stretch|buster|oldoldstable|bullseye|oldstable|bookworm|stable|trixie|testing) return
     esac
 
     warn "No backports kernel is available for $suite"

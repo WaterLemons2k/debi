@@ -1,3 +1,7 @@
+# Why fork?
+
+To re-add support for older releases of Debian (9).
+
 # Debian Network Reinstall Script
 
 [中文说明 ↓](#中文说明)
@@ -34,7 +38,7 @@ Download the script with curl:
 
 or wget:
 
-    wget -O debi.sh https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
+    wget -O debi.sh https://raw.githubusercontent.com/WaterLemons2k/debi/master/debi.sh
 
 ### 2. Run
 
@@ -77,9 +81,9 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--dns6 '2001:4860:4860::8888 2001:4860:4860::8844'` (effective only if IPv6 is specified)
  * `--hostname <string>` FQDN hostname (includes the domain name), e.g. `server1.example.com`
  * `--network-console` Enable the network console of the installer. `ssh installer@ip` to connect
- * `--version 12` Supports: `10`, `11`, `12`, `13`
+ * `--version 12` Supports: `9`, `10`, `11`, `12`, `13`
  * `--suite bullseye` **Please use `--version` instead if you don't have special needs.** e.g. `stable`, `testing`, `sid`
- * `--release-d-i` d-i (Debian Installer) for the released versions: 12 (bookworm), 11 (bullseye) and 10 (buster)
+ * `--release-d-i` d-i (Debian Installer) for the released versions: 12 (bookworm), 11 (bullseye), 10 (buster) and 9 (stretch)
  * `--daily-d-i` Use latest daily build of d-i (Debian Installer) for the unreleased version: 13 (trixie), sid (unstable)
  * `--mirror-protocol http` or `https` or `ftp`
  * `--https` alias to `--mirror-protocol https`
@@ -129,7 +133,7 @@ Otherwise, you can run this command to revert all changes made by the script:
 下载脚本：
 
 ```
-curl -fLO https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh && chmod a+rx debi.sh
+curl -fLO https://raw.githubusercontent.com/WaterLemons2k/debi/master/debi.sh && chmod a+rx debi.sh
 ```
 
 运行脚本：
