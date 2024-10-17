@@ -168,7 +168,7 @@ set_debian_version() {
             set_suite bookworm
             ;;
         13|trixie|testing)
-            set_suite bookworm
+            set_suite trixie
             ;;
         sid|unstable)
             set_suite sid
