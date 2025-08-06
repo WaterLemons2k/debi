@@ -1,3 +1,7 @@
+# Why fork?
+
+To re-add support for older releases of Debian (9).
+
 # Debian Network Reinstall Script
 
 - <span lang="zh-CN">[中文版在这里](./README.zh-CN.md)</span>
@@ -18,7 +22,7 @@ A script that reinstalls any VPS or physical machine to minimal Debian via netwo
 
 ```bash
 # Download the script
-curl -fLO https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
+curl -fLO https://raw.githubusercontent.com/WaterLemons2k/debi/master/debi.sh
 chmod +x debi.sh
 
 # Basic installation (creates user 'debian' with sudo access)
@@ -64,7 +68,7 @@ sudo reboot
 ### System & User Configuration
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--version 12` | `12` | Debian version: `10`, `11`, `12`, `13` |
+| `--version 12` | `12` | Debian version: `9`, `10`, `11`, `12`, `13` |
 | `--suite bookworm` | `bookworm` | Debian suite: `stable`, `testing`, `sid`, etc. |
 | `--user debian` | `debian` | Username (use `root` for root-only) |
 | `--password PASSWORD` | *prompt* | User password (prompted if not specified) |

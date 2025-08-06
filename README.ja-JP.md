@@ -1,5 +1,9 @@
 <div lang="ja-JP">
 
+# なぜ fork するのか？
+
+Debian (9) の古いバージョンのサポートを再追加するためです。
+
 # Debian Network Reinstall Script
 
 ## このスクリプトについて
@@ -17,7 +21,7 @@
 
 ```bash
 # スクリプトをダウンロード
-curl -fLO [https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh](https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh)
+curl -fLO https://raw.githubusercontent.com/WaterLemons2k/debi/master/debi.sh
 chmod +x debi.sh
 
 # 基本的なインストール（sudo権限を持つ 'debian' ユーザーを作成）
@@ -65,7 +69,7 @@ sudo reboot
 
 | オプション | デフォルト値 | 説明 |
 |---|---|---|
-| `--version 12` | `12` | Debianのバージョン: `10`, `11`, `12`, `13` |
+| `--version 12` | `12` | Debianのバージョン: `9`, `10`, `11`, `12`, `13` |
 | `--suite bookworm` | `bookworm` | Debianのスイート: `stable`, `testing`, `sid` など |
 | `--user debian` | `debian` | ユーザー名 (`root`を指定するとrootユーザーのみ) |
 | `--password PASSWORD` | *プロンプト* | ユーザーのパスワード（指定しない場合はプロンプト表示） |

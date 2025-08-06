@@ -1,5 +1,9 @@
 <div lang="zh-CN">
 
+# 为什么 fork?
+
+重新添加对旧版本 Debian (9) 的支持。
+
 # Debian 网络重装脚本
 
 ## 这是什么？
@@ -18,7 +22,7 @@
 
 ```bash
 # 下载脚本
-curl -fLO https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
+curl -fLO https://raw.githubusercontent.com/WaterLemons2k/debi/master/debi.sh
 chmod +x debi.sh
 
 # 基础安装 (会创建一个拥有 sudo 权限的 'debian' 用户)
@@ -66,7 +70,7 @@ sudo reboot
 
 | 选项 | 默认值 | 描述 |
 | :--- | :--- | :--- |
-| `--version 12` | `12` | Debian 版本：`10`, `11`, `12`, `13` |
+| `--version 12` | `12` | Debian 版本：`9`, `10`, `11`, `12`, `13` |
 | `--suite bookworm` | `bookworm` | Debian 发行代号：`stable`, `testing`, `sid` 等 |
 | `--user debian` | `debian` | 用户名 (使用 `root` 则只创建 root 用户) |
 | `--password PASSWORD` | *交互式提示* | 用户密码 (如果未指定，则会提示输入) |
