@@ -110,12 +110,13 @@ set_mirror_proxy() {
 }
 
 # Determines the security repository path format based on Debian suite
+# - Stretch (Debian 9): Uses old format "stretch/updates" 
 # - Buster (Debian 10): Uses old format "buster/updates" 
 # - Bullseye onwards and testing: Uses new format "suite-security"
 # - Sid/unstable: No security repository (fixes go directly to unstable)
 set_security_archive() {
     case $suite in
-        buster)
+        stretch|buster)
             security_archive="$suite/updates"
             ;;
         bullseye|oldoldstable|bookworm|oldstable|trixie|stable|forky|testing)
@@ -135,7 +136,7 @@ set_security_archive() {
 # Daily builds are necessary for testing/unstable as they need the latest kernel and packages
 set_daily_d_i() {
     case $suite in
-        buster|bullseye|oldoldstable|bookworm|oldstable|trixie|stable)
+        stretch|buster|bullseye|oldoldstable|bookworm|oldstable|trixie|stable)
             daily_d_i=false
             ;;
         forky|testing|sid|unstable)
@@ -146,15 +147,25 @@ set_daily_d_i() {
     esac
 }
 
+move_to_archive() {
+    case $suite in
+        stretch)
+            mirror_host=archive.debian.org
+    esac
+}
+
 set_suite() {
     suite=$1
     set_daily_d_i
     set_security_archive
+
+    move_to_archive
 }
 
 # Maps version numbers and release aliases to actual suite names
-# Accepts: version number (10-14), suite name (buster, bullseye, etc.), or alias (stable, testing, etc.)
+# Accepts: version number (9-14), suite name (stretch, buster, bullseye, etc.), or alias (stable, testing, etc.)
 # Current mapping:
+# - 9/stretch: archived
 # - 10/buster: No longer supported as oldoldstable (archived)
 # - 11/bullseye/oldoldstable: LTS support
 # - 12/bookworm/oldstable: Previous stable
@@ -163,6 +174,9 @@ set_suite() {
 # - sid/unstable: Rolling development branch
 set_debian_version() {
     case $1 in
+        9|stretch)
+            set_suite stretch
+            ;;
         10|buster)
             set_suite buster
             ;;
@@ -194,6 +208,9 @@ set_debian_version() {
 # Returns 0 if available, 1 if not
 has_cloud_kernel() {
     case $suite in
+        stretch)
+            [ "$architecture" = amd64 ] && [ "$bpo_kernel" = true ] && return
+            ;;
         buster)
             [ "$architecture" = amd64 ] && return
             [ "$architecture" = arm64 ] && [ "$bpo_kernel" = true ] && return
@@ -215,7 +232,7 @@ has_cloud_kernel() {
 # Returns 0 if available, 1 if not
 has_backports() {
     case $suite in
-        buster|bullseye|oldoldstable|bookworm|oldstable|trixie|stable|forky|testing) return
+        stretch|buster|bullseye|oldoldstable|bookworm|oldstable|trixie|stable|forky|testing) return
     esac
 
     warn "No backports kernel is available for $suite"
