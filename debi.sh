@@ -149,7 +149,7 @@ set_daily_d_i() {
 
 move_to_archive() {
     case $suite in
-        stretch)
+        stretch|buster)
             mirror_host=archive.debian.org
     esac
 }
