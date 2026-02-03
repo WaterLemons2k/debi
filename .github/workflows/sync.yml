@@ -10,3 +10,5 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - uses: tgymnich/fork-sync@v2
+        with:
+          auto_merge: false
